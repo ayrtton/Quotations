@@ -1,0 +1,11 @@
+body {
+    background-image: url("background.jpg");
+    background-size: cover;
+    color: white;
+}
+
+table th, tr, td{
+    background-color: rgba(0, 0, 255, 0.623);
+    color: white;
+}
+
