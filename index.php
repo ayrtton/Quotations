@@ -4,11 +4,6 @@
     require_once 'app/modules/hg-api.php';
 
     $hg = new HG_API(HG_API_KEY);
-    $dolar = $hg->dolar_quotation();
-
-    if($hg->is_error() == false) {
-        $variation = ($dolar['variation'] < 0) ? 'danger' : 'info' ;
-    }
 
     $currencies = $hg->currencies();
 
@@ -21,6 +16,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="refresh" content="10">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -51,8 +47,16 @@
 
                                 while( $arrayIterator->valid() )
                                 {
+                                    
+                                    if($arrayIterator->current()['variation'] > 0) 
+                                        $variation = "<a class='text-primary'>▲ </a>";
+                                    elseif($arrayIterator->current()['variation'] < 0)
+                                        $variation = "<a class='text-danger'>▼ </a>";
+                                    else
+                                      $variation = "<a class='text-info'>■ </a>";
+                                    
                                     echo("<tr>");
-                                        echo "<td>" . $arrayIterator->current()['name'] . "</td>" .
+                                        echo "<td>" . $variation . $arrayIterator->current()['name'] . "</td>" .
                                         "<td>" . $arrayIterator->current()['buy'] . "</td>" .
                                         "<td>" . $arrayIterator->current()['sell'] . "</td>" .
                                         "<td>" . $arrayIterator->current()['variation'] . "</td>";  
