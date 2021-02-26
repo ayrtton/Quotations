@@ -36,33 +36,38 @@
                             $arrObject = new ArrayObject($currencies);
                             $arrayIterator = $arrObject->getIterator();
 
-                            echo("<table class='table table-striped table-bordered'>");
+                            echo("<table class='table table-bordered table-hover table-light'>");
                                 $arrayIterator->next();
 
-                                foreach ($arrayIterator->current() as $key => $value) {
-                                    echo("<th>");
-                                        echo(ucfirst($key));
-                                    echo("</th>");
-                                }
+                                echo("<thead class='thead-light'>");
+                                    foreach ($arrayIterator->current() as $key => $value) {
+                                        echo("<th>");
+                                            echo(ucfirst($key));
+                                        echo("</th>");
+                                    }
+                                echo("</thead>");
 
-                                while( $arrayIterator->valid() )
-                                {
-                                    
-                                    if($arrayIterator->current()['variation'] > 0) 
-                                        $variation = "<a class='text-primary'>▲ </a>";
-                                    elseif($arrayIterator->current()['variation'] < 0)
-                                        $variation = "<a class='text-danger'>▼ </a>";
-                                    else
-                                      $variation = "<a class='text-info'>■ </a>";
-                                    
-                                    echo("<tr>");
-                                        echo "<td>" . $variation . $arrayIterator->current()['name'] . "</td>" .
-                                        "<td>" . $arrayIterator->current()['buy'] . "</td>" .
-                                        "<td>" . $arrayIterator->current()['sell'] . "</td>" .
-                                        "<td>" . $arrayIterator->current()['variation'] . "</td>";  
-                                        $arrayIterator->next();  
-                                    echo("</tr>");
-                                }
+                                echo("<tbody class='tbody-light'>");
+                                    while( $arrayIterator->valid() )
+                                    {
+                                        
+                                        if($arrayIterator->current()['variation'] > 0) 
+                                            $variation = "<a class='text-primary'>▲ </a>";
+                                        elseif($arrayIterator->current()['variation'] < 0)
+                                            $variation = "<a class='text-danger'>▼ </a>";
+                                        else
+                                          $variation = "<a class='text-info'>■ </a>";
+                                        
+                                        echo("<tr>");
+                                            echo "<td>" . $variation . $arrayIterator->current()['name'] . "</td>" .
+                                            "<td>" . $arrayIterator->current()['buy'] . "</td>" .
+                                            "<td>" . $arrayIterator->current()['sell'] . "</td>" .
+                                            "<td>" . $arrayIterator->current()['variation'] . "</td>";  
+                                            $arrayIterator->next();  
+                                        echo("</tr>");
+                                    }
+                                  echo("</thead>");
+                                
                             echo("</table>");
                         ?>
                       </p>
